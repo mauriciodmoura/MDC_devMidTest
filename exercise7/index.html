@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade Average Calculator</title>
+</head>
+<body>
+    <h1>Grade Average Calculator</h1>
+    <h3>Math</h3>
+    <input id="grade1" type="number" placeholder="Enter grade 1">
+    <h3>English</h3>
+    <input id="grade2" type="number" placeholder="Enter grade 2">
+    <h3>History</h3>
+    <input id="grade3" type="number" placeholder="Enter grade 3">
+    <button id="calculate">Calculate</button>
+    <p id="result"></p>
+
+    <script>
+        document.getElementById('calculate').addEventListener('click', async () => {
+            const grade1 = document.getElementById('grade1').value;
+            const grade2 = document.getElementById('grade2').value;
+            const grade3 = document.getElementById('grade3').value;
+            const response = await fetch(`http://localhost:3000/average/${grade1}/${grade2}/${grade3}`);
+            const data = await response.json();
+            document.getElementById('result').innerText = 
+                `The average grade is ${data.result}.`;
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Calculator</title>
+</head>
+<body>
+    <h1>Simple Calculator</h1>
+    <input id="a" type="number" placeholder="Enter the first number">
+    <select id="operator">
+        <option value="+">+</option>
+        <option value="-">-</option>
+        <option value="*">*</option>
+        <option value="/">/</option>
+    </select>
+    <input id="b" type="number" placeholder="Enter the second number">
+    <button id="calculate">Calculate</button>
+    <p id="result"></p>
+
+    <script>
+        document.getElementById('calculate').addEventListener('click', async () => {
+            const a = document.getElementById('a').value;
+            const b = document.getElementById('b').value;
+            const operator = document.getElementById('operator').value;
+            const response = await fetch('http://localhost:3000/calculate', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    a: a,
+                    b: b,
+                    operator: operator
+                })
+            });
+            const data = await response.json();
+            if(data.error) {
+                document.getElementById('result').innerText = `Error: ${data.error}`;
+            } else {
+                document.getElementById('result').innerText = `The result is: ${data.result}`;
+            }
+        });
+    </script>
+</body>
+</html>

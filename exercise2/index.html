@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prime Numbers</title>
+</head>
+<body>
+    <h1>Prime Numbers</h1>
+    <input id="n" type="number" placeholder="Enter a number" value="10">
+    <button id="generate">Generate Primes</button>
+    <p id="result"></p>
+
+    <script>
+        document.getElementById('generate').addEventListener('click', async () => {
+            const n = document.getElementById('n').value;
+            const response = await fetch(`http://localhost:3000/primes/${n}`);
+            const data = await response.json();
+            document.getElementById('result').innerText = 
+                `The first ${n} primes are: ${data.result.join(', ')}.`;
+        });
+    </script>
+</body>
+</html>

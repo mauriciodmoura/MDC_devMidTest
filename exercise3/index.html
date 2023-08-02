@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Factorial Calculator</title>
+</head>
+<body>
+    <h1>Factorial Calculator</h1>
+    <input id="n" type="number" placeholder="Enter a number">
+    <button id="calculate">Calculate Factorial</button>
+    <p id="result"></p>
+
+    <script>
+        document.getElementById('calculate').addEventListener('click', async () => {
+            const n = document.getElementById('n').value;
+            const response = await fetch(`http://localhost:3000/factorial/${n}`);
+            const data = await response.json();
+            document.getElementById('result').innerText = 
+                `The factorial of ${n} is: ${data.result}.`;
+        });
+    </script>
+</body>
+</html>

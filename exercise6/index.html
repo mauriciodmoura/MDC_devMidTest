@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vowel Counter</title>
+</head>
+<body>
+    <h1>Vowel Counter</h1>
+    <input id="sentence" type="text" placeholder="Enter a sentence">
+    <button id="count">Count</button>
+    <p id="result"></p>
+
+    <script>
+        document.getElementById('count').addEventListener('click', async () => {
+            const sentence = document.getElementById('sentence').value;
+            const response = await fetch(`http://localhost:3000/vowels/${sentence}`);
+            const data = await response.json();
+            document.getElementById('result').innerText = 
+                `The sentence has ${data.result} vowel(s).`;
+        });
+    </script>
+</body>
+</html>
